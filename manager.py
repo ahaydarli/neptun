@@ -1,14 +1,11 @@
 from app import create_app, db
 from flask_script import Manager
 from flask_migrate import Migrate, MigrateCommand
-from flask import jsonify
 
 app = create_app('default')
+migrate = Migrate(app, db)
 manager = Manager(app)
-migrate = Migrate(app)
-
 manager.add_command('db', MigrateCommand)
-
 
 @manager.command
 def run():

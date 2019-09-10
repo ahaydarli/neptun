@@ -3,8 +3,10 @@ from flask_debug import Debug
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from config import config
+from flask_marshmallow import Marshmallow
 
 db = SQLAlchemy()
+ma = Marshmallow()
 
 
 def create_app(config_name):
@@ -13,7 +15,9 @@ def create_app(config_name):
     app.config.from_object(config[config_name])
     app.app_context().push()
     db.init_app(app)
+    db.metadata.clear()
     db.create_all()
+    ma.init_app(app)
     from .customer import customer_blueprint
     from .dashboard import dashboard_blueprint
     from .driver import driver_blueprint
