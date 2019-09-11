@@ -4,9 +4,11 @@ from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from config import config
 from flask_marshmallow import Marshmallow
+from flask_jwt_extended import JWTManager
 
 db = SQLAlchemy()
 ma = Marshmallow()
+jwt = JWTManager()
 
 
 def create_app(config_name):
@@ -18,6 +20,7 @@ def create_app(config_name):
     db.metadata.clear()
     db.create_all()
     ma.init_app(app)
+    jwt.init_app(app)
     from .customer import customer_blueprint
     from .dashboard import dashboard_blueprint
     from .driver import driver_blueprint

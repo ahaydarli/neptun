@@ -7,6 +7,7 @@ migrate = Migrate(app, db)
 manager = Manager(app)
 manager.add_command('db', MigrateCommand)
 
+
 @manager.command
 def run():
     app.run(use_reloader=True, debug=True)

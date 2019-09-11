@@ -1,5 +1,5 @@
 from app import ma
-from .models import Customer
+from .models.customer import Customer
 
 
 class CustomerSchema(ma.ModelSchema):
@@ -8,3 +8,4 @@ class CustomerSchema(ma.ModelSchema):
 
 
 customers_schema = CustomerSchema(many=True)
+customer_schema = CustomerSchema()

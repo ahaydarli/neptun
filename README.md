@@ -1,1 +1,1 @@
-6second Courier App
+6second App
