@@ -7,6 +7,7 @@ class Driver(db.Model):
     last_name = db.Column(db.Integer)
     phone = db.Column(db.String)
     email = db.Column(db.String)
+    status = db.Column(db.SmallInteger, default=0)
 
     def __repr__(self):
         return "Driver: {}".format(self.id)

@@ -1,10 +1,11 @@
 from . import customer_blueprint
 from .models.customer import Customer
 from .serializer import customers_schema, customer_schema
-from flask import jsonify, request
+from flask import jsonify, request, make_response
 from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity
 from app import db
 from .controllers.users import *
+from ..common.helpers.sms_provider import *
 
 
 @customer_blueprint.route('/')
@@ -31,7 +32,7 @@ def user_show(id):
 @customer_blueprint.route('/registration', methods=['POST'])
 def registration():
     if not request.is_json:
-        return jsonify({'message': "Request is not json"}), 400
+        return make_response(jsonify({'message': "Request is not json"})), 400
     phone = request.json.get('phone', None)
     if not phone:
         return jsonify({"message": "Missing phone parameter"}), 400
