@@ -15,9 +15,9 @@ def generate_code():
 
 
 def send_sms(to_number, body):
-    account_sid = 'ACf5c4ea2f635331c8ac203c99d19a418b'
-    auth_token = '96e9095ab87df7a41cf625236885698b'
-    messaging_service_sid = 'MGef181858641d2ebc3a75b7966d9ac3d4'
+    account_sid = ''
+    auth_token = ''
+    messaging_service_sid = ''
     client = Client(account_sid, auth_token)
     message = client.api.messages.create(to_number, messaging_service_sid=messaging_service_sid, body=body)
     return message
