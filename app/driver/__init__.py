@@ -2,7 +2,5 @@ from flask import Blueprint
 
 driver_blueprint = Blueprint('driver_blueprint', __name__)
 
+from . import views
 
-@driver_blueprint.route('/')
-def index():
-    return {'page': 'driver'}

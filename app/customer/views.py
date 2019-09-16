@@ -15,7 +15,17 @@ def index():
 @customer_blueprint.route('/users')
 def user():
     users = get_all_users()
-    return jsonify(customers_schema.dump(users)), 200
+    resp = jsonify(customers_schema.dump(users))
+    resp.headers.add('Access-Control-Expose-Headers', 'X-Total-Count')
+    resp.headers['X-Total-Count'] = Customer.query.count()
+    return resp, 200
+
+
+@customer_blueprint.route('/users/<int:id>')
+def user_show(id):
+    user = Customer.query.filter_by(id=id).first()
+    resp = jsonify(customer_schema.dump(user))
+    return resp, 200
 
 
 @customer_blueprint.route('/registration', methods=['POST'])
@@ -55,5 +65,6 @@ def logout():
 def me():
     current_user = get_jwt_identity()
     return jsonify(logged_user=current_user), 200
+
 
 
